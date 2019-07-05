@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Unlimited Whatsapp Status</string>
+    <string name="app_name">Unlimited Status</string>
+    <!--Tab Name-->
+    <string name="photoTab">Photo</string>
+    <string name="videoTab">Video</string>
+    <string name="downloadTab">Download</string>
 </resources>
