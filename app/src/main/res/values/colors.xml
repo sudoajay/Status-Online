@@ -9,7 +9,7 @@
 
     <!--Background ImageColor-->
     <color name="noInternetConnection">#F7F7F7</color>
-    <color name="noDataFound">#ffffff</color>
+
 
     <!--Toast Color Background and text Color-->
     <color name="toastBackgroundColor">@android:color/black</color>

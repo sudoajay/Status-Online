@@ -297,7 +297,6 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
     public void CheckForEmpty(){
         if(links.isEmpty()){
             noDataFound.setVisibility(View.VISIBLE);
-            constraintLayout.setBackgroundColor(getResources().getColor(R.color.noDataFound));
         }else {
             noDataFound.setVisibility(View.GONE);
         }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -37,7 +38,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
     private List<Long> lastModiArry = new ArrayList<>();
     private GrabData grabData;
     private SwipeRefreshLayout swipeToRefresh;
-    private ImageView nothingToShow_ImageView;
+    private ConstraintLayout nothingToShow_ConstraintsLayout;
     private Set<String> fileRemove;
 
     public DownloadFragment(MainActivity main_Activity) {
@@ -51,8 +52,8 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         view = inflater.inflate(R.layout.fragment_download, container, false);
 
         recyclerView = view.findViewById(R.id.recyclerView);
-        nothingToShow_ImageView = view.findViewById(R.id.nothingToShow_ImageView);
 
+        nothingToShow_ConstraintsLayout = view.findViewById(R.id.nothingToShow_ConstraintsLayout);
         swipeToRefresh = view.findViewById(R.id.swipeToRefresh);
         swipeToRefresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
@@ -61,9 +62,9 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
 
         // if there is no data
         if (grabData.getArrayPath().isEmpty()) {
-            nothingToShow_ImageView.setVisibility(View.VISIBLE);
+            nothingToShow_ConstraintsLayout.setVisibility(View.VISIBLE);
         } else {
-            nothingToShow_ImageView.setVisibility(View.GONE);
+            nothingToShow_ConstraintsLayout.setVisibility(View.GONE);
         }
 
         swipeToRefresh.setOnRefreshListener(this);

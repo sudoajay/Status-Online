@@ -43,6 +43,8 @@
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
     <string name="search_text">Search</string>
+    <string name="nothing_text">Nothing!!</string>
+    <string name="download_folder_empty_text">Your download folder is empty.</string>
 
 
 </resources>
