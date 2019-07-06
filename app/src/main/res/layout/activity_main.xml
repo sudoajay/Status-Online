@@ -9,18 +9,19 @@
         android:id="@+id/localTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/tabBackgroundColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabIconTint="@color/tabsColor"
-        app:tabIndicatorColor="@color/tabsColor"
         app:tabIndicatorFullWidth="true"
         app:tabIndicatorHeight="2dp"
         app:tabInlineLabel="true"
         app:tabTextAppearance="@style/MyCustomTextAppearance"
-        app:tabTextColor="@color/tabsColor">
+        app:tabSelectedTextColor="@color/colorPrimary"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabTextColor="@color/tabColor"
+        app:tabIconTint="@color/tabColor">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

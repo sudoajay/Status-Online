@@ -4,5 +4,20 @@
     <color name="colorPrimaryDark">#a82400</color>
     <color name="colorAccent">#cc0000</color>
 
-    <color name="tabsColor">#ffffff</color>
+    <color name="tabBackgroundColor">#ffffff</color>
+    <color name="tabColor">#A39D9D</color>
+
+    <!--Background ImageColor-->
+    <color name="noInternetConnection">#F7F7F7</color>
+    <color name="noDataFound">#ffffff</color>
+
+    <!--Toast Color Background and text Color-->
+    <color name="toastBackgroundColor">@android:color/black</color>
+    <color name="toastTextColor">#D6D1D1</color>
+
+    <!--Info Layout -->
+    <color name="infoLayout_BackColor">#2546ABEB</color>
+
+    <color name="textPathColor">#D04B4848</color>
+    <color name="textNameColor">#1F1E1E</color>
 </resources>

@@ -4,4 +4,45 @@
     <string name="photoTab">Photo</string>
     <string name="videoTab">Video</string>
     <string name="downloadTab">Download</string>
+    <string name="app_permission">App Permission</string>
+    <string name="app_permission_text">In Android 6+ Apps will ask for permisson once you start using them.</string>
+    <string name="see_more_text">See More</string>
+    <string name="continue_text">Continue</string>
+
+    <!--MY_PREFS_NAME-->
+    <string name="MY_PREFS_NAME">Unlimited Status</string>
+    <string name="path_removed">Path Removed</string>
+    <string name="photo_link_grab">Photo Link Grab</string>
+    <string name="video_link_grab">Video Link Grab</string>
+
+    <!--Info Layout-->
+    <string name="info_NameText">Name : </string>
+    <string name="info_LocationText">Location : </string>
+    <string name="info_SizeText">Size : </string>
+    <string name="info_TypeText">Type : </string>
+    <string name="info_ExtText">Ext : </string>
+    <string name="info_CreatedText">Created : </string>
+    <string name="open_text">Open</string>
+
+
+    <!--Text-->
+    <string name="delete_Text">Delete</string>
+    <string name="photo_Text">Photo</string>
+    <string name="video_Text">Video</string>
+
+    <!--Download Setting-->
+    <string name="delete_Action_Mode">Delete</string>
+    <string name="remove_Action_Mode">Remove</string>
+    <string name="heading_Action_Mode">Select your option</string>
+
+    <!--Custom Dialog-->
+    <string name="delete_CustomDialog_Text">Are you sure you want to Delete this file?</string>
+    <string name="remove_CustomDialog_Text">Are you sure you want to Remove this file?</string>
+
+
+    <string name="yes_text">Yes</string>
+    <string name="no_text">No</string>
+    <string name="search_text">Search</string>
+
+
 </resources>

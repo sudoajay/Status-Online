@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="arrow_Image_View_margin_start">5dp</dimen>
+    <dimen name="activity_duplicate_list_view_margin_top">2dp</dimen>
+
+</resources>
