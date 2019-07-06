@@ -45,6 +45,13 @@
     <string name="search_text">Search</string>
     <string name="nothing_text">Nothing!!</string>
     <string name="download_folder_empty_text">Your download folder is empty.</string>
+    <string name="share_text">Share</string>
+    <string name="save_text">Save</string>
 
-
+    <!--Toast Name-->
+    <string name="cant_OnlineShare">Sorry, you can\'t share this</string>
+    <string name="sorry_WeDontSupport">Sorry We Don\'t Support That Format</string>
+    <string name="sorry_CantPlayed">Sorry, this video cannot be played</string>
+    <string name="loading">Buffering…</string>
+    <string name="search">Search</string>
 </resources>
