@@ -2,16 +2,19 @@ package com.sudoajay.unlimitedwhatsappstatus;
 
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
@@ -21,7 +24,6 @@ import com.sudoajay.unlimitedwhatsappstatus.Fragments.Download.Information_Data;
 import com.sudoajay.unlimitedwhatsappstatus.Permission.AndroidExternalStoragePermission;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private boolean doubleBackToExitPressedOnce;
     private String whichFragment;
+    private SearchView searchView;
+    private MyAdapter adapter;
     private ActionMode actionMode;
 
     @Override
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final MyAdapter adapter = new MyAdapter(this,getSupportFragmentManager(), tabLayout.getTabCount());
+        adapter = new MyAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewPager.setAdapter(adapter);
 
@@ -141,12 +145,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
+
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                if (tabLayout.getSelectedTabPosition() == 0) {
+                    adapter.getPhoto().setSearchText(query);
+                    adapter.getPhoto().getmPhotoVideoAdapter().getFilter().filter(query);
+                } else if (tabLayout.getSelectedTabPosition() == 1) {
+                    adapter.getVideo().setSearchText(query);
+                    adapter.getVideo().getmPhotoVideoAdapter().getFilter().filter(query);
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (tabLayout.getSelectedTabPosition() == 2) {
+                    adapter.getDownloadFragment().getRecyclerview_adapter().getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+        return true;
+    }
+
     public void CallInfo_CustomDialog(final String tabName, final ArrayList<String> list, final int index) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Information_Data information_data = new Information_Data(tabName, MainActivity.this,list,index);
         information_data.show(ft, "dialog");
     }
-
     public ActionMode getActionMode() {
         return actionMode;
     }

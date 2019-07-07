@@ -22,6 +22,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
 
 import com.sudoajay.unlimitedwhatsappstatus.HelperClass.FileSize;
+import com.sudoajay.unlimitedwhatsappstatus.PhotoVideoViewer.PhotoVideoView;
 import com.sudoajay.unlimitedwhatsappstatus.R;
 
 import java.io.File;
@@ -161,12 +162,12 @@ public class Information_Data extends DialogFragment implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.open_Button:
-//                Intent intent = new Intent(activity, PhotoVideoView.class);
-//                intent.putExtra("WhichTab", tabName);
-//                intent.putExtra("WhichFragment", "Download");
-//                intent.putStringArrayListExtra("PathArray", list);
-//                intent.putExtra("PathArrayPosition", index + "");
-//                activity.startActivity(intent);
+                Intent intent = new Intent(activity, PhotoVideoView.class);
+                intent.putExtra("WhichTab", tabName);
+                intent.putExtra("WhichFragment", "Download");
+                intent.putStringArrayListExtra("PathArray", list);
+                intent.putExtra("PathArrayPosition", index + "");
+                activity.startActivity(intent);
                 dismiss();
                 break;
             case R.id.cancel_Button:

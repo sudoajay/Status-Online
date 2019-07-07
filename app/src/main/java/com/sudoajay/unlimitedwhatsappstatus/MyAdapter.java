@@ -12,6 +12,8 @@ public class MyAdapter extends FragmentPagerAdapter {
     private String[] tabName = {"photo", "video", "download"};
     private int totalTabs;
     private MainActivity mainActivity;
+    private PhotoVideoFragment photo, video;
+    private DownloadFragment downloadFragment;
 
     public MyAdapter(MainActivity mainActivity,FragmentManager fm, int totalTabs) {
         super(fm);
@@ -23,11 +25,11 @@ public class MyAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new PhotoVideoFragment(tabName[0],mainActivity);
+                return photo = new PhotoVideoFragment(tabName[0], mainActivity);
             case 1:
-                return new PhotoVideoFragment(tabName[1],mainActivity);
+                return video = new PhotoVideoFragment(tabName[1], mainActivity);
             case 2:
-                return new DownloadFragment(mainActivity);
+                return downloadFragment = new DownloadFragment(mainActivity);
             default:
                 return null;
         }
@@ -36,5 +38,17 @@ public class MyAdapter extends FragmentPagerAdapter {
     @Override
     public int getCount() {
         return totalTabs;
+    }
+
+    public PhotoVideoFragment getPhoto() {
+        return photo;
+    }
+
+    public PhotoVideoFragment getVideo() {
+        return video;
+    }
+
+    public DownloadFragment getDownloadFragment() {
+        return downloadFragment;
     }
 }

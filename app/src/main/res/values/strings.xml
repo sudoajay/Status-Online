@@ -43,8 +43,6 @@
     <string name="yes_text">Yes</string>
     <string name="no_text">No</string>
     <string name="search_text">Search</string>
-    <string name="nothing_text">Nothing!!</string>
-    <string name="download_folder_empty_text">Your download folder is empty.</string>
     <string name="share_text">Share</string>
     <string name="save_text">Save</string>
 
@@ -54,4 +52,12 @@
     <string name="sorry_CantPlayed">Sorry, this video cannot be played</string>
     <string name="loading">Buffering…</string>
     <string name="search">Search</string>
+
+    <!--Download Folder Empty-->
+    <string name="nothing_text">Nothing!!</string>
+    <string name="download_folder_empty_text">Your download folder is empty.</string>
+
+    <!--Search not found-->
+    <string name="search_not_found">Oops, Item Not Found!!</string>
+    <string name="search_not_found_text">Try rewording your search or entering a new keyword</string>
 </resources>

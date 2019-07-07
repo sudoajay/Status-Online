@@ -1,5 +1,6 @@
 package com.sudoajay.unlimitedwhatsappstatus.Fragments.PhotoVideo;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.sudoajay.unlimitedwhatsappstatus.DataBase.PhotoDataBase;
 import com.sudoajay.unlimitedwhatsappstatus.DataBase.VideoDataBase;
+import com.sudoajay.unlimitedwhatsappstatus.PhotoVideoViewer.PhotoVideoView;
 import com.sudoajay.unlimitedwhatsappstatus.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -67,14 +70,14 @@ public class PhotoVideo_Adapter extends RecyclerView.Adapter<PhotoVideo_Adapter.
         holder.localCardViewImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(photoVideoFragment.getContext(), PhotoVideoView.class);
-//                intent.putExtra("WhichTab",tabName);
-//                intent.putExtra("WhichFragment","online");
-//                intent.putStringArrayListExtra("PathArray", (ArrayList<String>) links);
-//                intent.putStringArrayListExtra("PathName", (ArrayList<String>) name);
-//                intent.putStringArrayListExtra("ImageLink", (ArrayList<String>) imgLink);
-//                intent.putExtra("PathArrayPosition",position+"");
-//                photoVideoFragment.startActivity(intent);
+                Intent intent = new Intent(photoVideoFragment.getContext(), PhotoVideoView.class);
+                intent.putExtra("WhichTab",tabName);
+                intent.putExtra("WhichFragment","online");
+                intent.putStringArrayListExtra("PathArray", (ArrayList<String>) links);
+                intent.putStringArrayListExtra("PathName", (ArrayList<String>) name);
+                intent.putStringArrayListExtra("ImageLink", (ArrayList<String>) imgLink);
+                intent.putExtra("PathArrayPosition",position+"");
+                photoVideoFragment.startActivity(intent);
             }
         });
     }
@@ -83,7 +86,6 @@ public class PhotoVideo_Adapter extends RecyclerView.Adapter<PhotoVideo_Adapter.
     public int getItemCount() {
         return links.size();
     }
-
 
     @Override
     public Filter getFilter() {

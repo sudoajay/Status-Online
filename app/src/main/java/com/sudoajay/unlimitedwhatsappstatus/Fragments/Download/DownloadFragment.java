@@ -130,4 +130,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     }
 
+    public Recyclerview_Adapter getRecyclerview_adapter() {
+        return recyclerview_adapter;
+    }
 }

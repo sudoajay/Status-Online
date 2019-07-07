@@ -2,6 +2,7 @@ package com.sudoajay.unlimitedwhatsappstatus.Fragments.Download;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -9,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.sudoajay.unlimitedwhatsappstatus.HelperClass.CustomToast;
 import com.sudoajay.unlimitedwhatsappstatus.HelperClass.Delete;
 import com.sudoajay.unlimitedwhatsappstatus.MainActivity;
+import com.sudoajay.unlimitedwhatsappstatus.PhotoVideoViewer.PhotoVideoView;
 import com.sudoajay.unlimitedwhatsappstatus.R;
 import com.sudoajay.unlimitedwhatsappstatus.sharedPreferences.PrefManager;
 
@@ -30,9 +34,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adapter.MyViewHolder> {
+public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adapter.MyViewHolder> implements Filterable {
 
-    private List<String> list;
+    private List<String> list, searchList, completeList;
     private MainActivity activity;
     private String tabName;
     private DownloadFragment downloadFragment;
@@ -45,8 +49,11 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
         this.activity = activity;
         this.downloadFragment = downloadFragment;
         prefManager = new PrefManager(activity);
+        completeList = new ArrayList<>(list);
+        searchList = new ArrayList<>();
         SetupSelectedList();
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView coverImageView, infoImageView;
@@ -162,6 +169,7 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
             actionMode.setTitle(activity.getString(R.string.heading_Action_Mode));
 
 
+
             return true;
         }
 
@@ -272,12 +280,12 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
                     case R.id.coverImageView:
                     case R.id.pathTextView:
 //                        // get Tab Name
-//                        Intent intent = new Intent(activity, PhotoVideoView.class);
-//                        intent.putExtra("WhichTab", tabName);
-//                        intent.putExtra("WhichFragment", "Download");
-//                        intent.putStringArrayListExtra("PathArray", (ArrayList<String>) list);
-//                        intent.putExtra("PathArrayPosition", index + "");
-//                        activity.startActivity(intent);
+                        Intent intent = new Intent(activity, PhotoVideoView.class);
+                        intent.putExtra("WhichTab", tabName);
+                        intent.putExtra("WhichFragment", "Download");
+                        intent.putStringArrayListExtra("PathArray", (ArrayList<String>) list);
+                        intent.putExtra("PathArrayPosition", index + "");
+                        activity.startActivity(intent);
                         break;
                     case R.id.info_ImageView:
                         activity.CallInfo_CustomDialog(tabName, (ArrayList<String>) list, index);
@@ -298,4 +306,43 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
             }
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterPattern = constraint.toString().trim();
+
+            if (constraint.length() != 0) {
+                searchList.clear();
+                for (String get : completeList) {
+                    if (new File(get).getName().contains(filterPattern)) {
+                        searchList.add(get);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = searchList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            fileSelected.clear();
+            list.addAll(searchList);
+            SetupSelectedList();
+            notifyDataSetChanged();
+        }
+    };
+
+
+
 }

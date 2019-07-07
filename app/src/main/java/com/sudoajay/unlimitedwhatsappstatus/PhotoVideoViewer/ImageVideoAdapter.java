@@ -232,6 +232,8 @@ public class ImageVideoAdapter extends PagerAdapter {
                     MediaStore.Images.Thumbnails.MINI_KIND);
             Drawable drawable = new BitmapDrawable(activity.getResources(), thumb);
             videoView.setBackground(drawable);
+        }else {
+            ShowImageView(fileImgLink);
         }
     }
 

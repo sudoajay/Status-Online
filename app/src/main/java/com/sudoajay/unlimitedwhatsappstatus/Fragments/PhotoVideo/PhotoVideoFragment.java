@@ -45,7 +45,8 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
     private RecyclerView mRecyclerView;
     private ConstraintLayout constraintLayout;
     private SwipeRefreshLayout swipeToRefresh;
-    private ImageView noInternetConnection_ImageView,noDataFound;
+    private ImageView noInternetConnection_ImageView;
+    private ConstraintLayout nothingToShow_ConstraintsLayout;
     private PhotoDataBase photoDataBase;
     private VideoDataBase videoDataBase;
     private PhotoVideo_Adapter mPhotoVideoAdapter;
@@ -91,7 +92,7 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
         // Get the widgets reference from XML layout
         mRecyclerView = view.findViewById(R.id.recycler_view);
         noInternetConnection_ImageView = view.findViewById(R.id.noInternetConnection_ImageView);
-        noDataFound = view.findViewById(R.id.noDataFound);
+        nothingToShow_ConstraintsLayout = view.findViewById(R.id.nothingToShow_ConstraintsLayout);
         photoDataBase = new PhotoDataBase(getContext());
         videoDataBase = new VideoDataBase(getContext());
         prefManager = new PrefManager((activity));
@@ -275,7 +276,7 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
                     RunThread_Internet();
                 }
             }
-        }, 10000); // 5 sec
+        }, 20000); // 5 sec
 
     }
 
@@ -296,9 +297,9 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
     }
     public void CheckForEmpty(){
         if(links.isEmpty()){
-            noDataFound.setVisibility(View.VISIBLE);
+            nothingToShow_ConstraintsLayout.setVisibility(View.VISIBLE);
         }else {
-            noDataFound.setVisibility(View.GONE);
+            nothingToShow_ConstraintsLayout.setVisibility(View.GONE);
         }
     }
 }
