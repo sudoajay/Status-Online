@@ -186,7 +186,7 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
             @Override
             public void run() {
                 GrabAndFill();
-
+                mPhotoVideoAdapter.notifyDataSetChanged();
                 swipeToRefresh.setRefreshing(false);
             }
         }, 2000);

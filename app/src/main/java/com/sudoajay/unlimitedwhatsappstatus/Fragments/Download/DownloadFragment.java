@@ -60,6 +60,13 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         fileRemove = new PrefManager(main_Activity.getApplicationContext()).getFilePath();
         GrabAndFill();
 
+
+        recyclerview_adapter = new Recyclerview_Adapter(main_Activity, grabData.getArrayPath(), DownloadFragment.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.setAdapter(recyclerview_adapter);
         // if there is no data
         if (grabData.getArrayPath().isEmpty()) {
             nothingToShow_ConstraintsLayout.setVisibility(View.VISIBLE);
@@ -99,7 +106,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
             @Override
             public void run() {
                 GrabAndFill();
-
+                recyclerview_adapter.notifyDataSetChanged();
                 swipeToRefresh.setRefreshing(false);
             }
         }, 2000);
@@ -121,12 +128,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         }
         LastModiSort();
 
-        recyclerview_adapter = new Recyclerview_Adapter(main_Activity, grabData.getArrayPath(), DownloadFragment.this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView.setAdapter(recyclerview_adapter);
 
     }
 

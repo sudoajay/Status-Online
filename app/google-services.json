@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1082978091083",
+    "firebase_url": "https://unlimited-status-2a657.firebaseio.com",
+    "project_id": "unlimited-status-2a657",
+    "storage_bucket": "unlimited-status-2a657.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082978091083:android:e38a52adca378028",
+        "android_client_info": {
+          "package_name": "com.sudoajay.unlimitedwhatsappstatus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082978091083-fe9oansi5nan4adqpiam41epgn38tfhq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo747nz5jpV527YDzDiKt9Fv-jk63P47M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082978091083-fe9oansi5nan4adqpiam41epgn38tfhq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
