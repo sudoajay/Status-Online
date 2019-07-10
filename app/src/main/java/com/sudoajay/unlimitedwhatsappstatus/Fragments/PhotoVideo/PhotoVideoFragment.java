@@ -175,7 +175,7 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
             }
         }
 
-
+        mPhotoVideoAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -186,7 +186,6 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
             @Override
             public void run() {
                 GrabAndFill();
-                mPhotoVideoAdapter.notifyDataSetChanged();
                 swipeToRefresh.setRefreshing(false);
             }
         }, 2000);
@@ -198,7 +197,6 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
           cursor.moveToFirst();
           do {
               if (links.size() >= 500) links = RemoveArrayFromList(links);
-              Log.e( "GrabPhotoAndRefresh", links.size()+" ----");
               links.add(cursor.getString(1));
               if (name.size() >= 500) name = RemoveArrayFromList(name);
               name.add(cursor.getString(2));
@@ -268,15 +266,11 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
                         noInternetConnection_ImageView.setVisibility(View.GONE);
                         GrabAndFill();
                     }
-                    if (!internetConnection && noInternetConnection_ImageView.getVisibility() == View.GONE)
-                        CustomToast.ToastIt(getContext(), "Please Connect To Internet", Toast.LENGTH_SHORT);
-
-
                     // do something...
                     RunThread_Internet();
                 }
             }
-        }, 20000); // 5 sec
+        }, 5000); // 5 sec
 
     }
 

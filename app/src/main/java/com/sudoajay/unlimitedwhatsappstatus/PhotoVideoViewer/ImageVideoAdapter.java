@@ -30,11 +30,9 @@ import com.bumptech.glide.Glide;
 import com.sudoajay.unlimitedwhatsappstatus.BuildConfig;
 import com.sudoajay.unlimitedwhatsappstatus.R;
 
-
 import java.io.File;
 import java.net.URLConnection;
 import java.util.List;
-import java.util.Objects;
 
 public class ImageVideoAdapter extends PagerAdapter {
     private List<String> pathArray;
@@ -69,6 +67,7 @@ public class ImageVideoAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.imagevideo_adapter, container, false);
 
         imageView = itemView.findViewById(R.id.imageView);
+        myMediaController = new MediaController(activity);
         String path;
         if (!whichFragment.equals("online")) {
             videoView = itemView.findViewById(R.id.videoView);
@@ -154,7 +153,8 @@ public class ImageVideoAdapter extends PagerAdapter {
             videoView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    myMediaController.show();
+                        myMediaController.show();
+
                 }
             });
             if (!whichFragment.equals("online")) {
@@ -183,7 +183,7 @@ public class ImageVideoAdapter extends PagerAdapter {
                                 /*
                                  * add media controller
                                  */
-                                myMediaController = new MediaController(activity);
+
                                 myMediaController.setMediaPlayer(videoView);
                                 videoView.setMediaController(myMediaController);
                                 /*

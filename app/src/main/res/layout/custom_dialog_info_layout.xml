@@ -4,22 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="400dp"
     android:orientation="horizontal">
 
     <FrameLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="5dp"
-            android:paddingTop="60dp"
+            android:background="@android:color/white"
+            android:paddingTop="55dp"
             android:paddingBottom="10dp"
-            android:layout_marginRight="5dp">
+            tools:layout_editor_absoluteY="12dp">
 
 
             <View
@@ -37,11 +37,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/info_NameText"
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintStart_toStartOf="@+id/view"
-                app:layout_constraintTop_toTopOf="@+id/view"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="@+id/view" />
 
             <TextView
                 android:id="@+id/infoName_TextView"
@@ -71,11 +71,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/info_LocationText"
                 app:layout_constraintBottom_toBottomOf="@+id/view2"
                 app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@+id/view2"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="@+id/view2" />
 
             <TextView
                 android:id="@+id/infoLocation_TextView"
@@ -105,11 +105,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/info_SizeText"
                 app:layout_constraintBottom_toBottomOf="@+id/view3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view3"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="@+id/view3" />
 
             <TextView
                 android:id="@+id/infoSize_TextView"
@@ -139,23 +139,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/info_TypeText"
                 app:layout_constraintBottom_toBottomOf="@+id/view4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/view4"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="@+id/view4" />
 
             <TextView
                 android:id="@+id/infoType_TextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="@+id/view4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toTopOf="@+id/view4"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toTopOf="@+id/view4" />
 
             <View
                 android:id="@+id/view5"
@@ -173,12 +173,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/info_ExtText"
                 app:layout_constraintBottom_toBottomOf="@+id/view5"
                 app:layout_constraintStart_toStartOf="@+id/view5"
                 app:layout_constraintTop_toTopOf="@+id/view5"
-                app:layout_constraintVertical_bias="0.523"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintVertical_bias="0.523" />
 
             <TextView
                 android:id="@+id/infoExt_TextView"
@@ -208,12 +208,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
                 android:text="@string/info_CreatedText"
                 app:layout_constraintBottom_toBottomOf="@+id/view6"
                 app:layout_constraintStart_toStartOf="@+id/view6"
                 app:layout_constraintTop_toTopOf="@+id/view6"
-                app:layout_constraintVertical_bias="0.619"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintVertical_bias="0.619" />
 
             <TextView
                 android:id="@+id/infoCreated_TextView"

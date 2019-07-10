@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
@@ -35,7 +37,6 @@ public class Information_Data extends DialogFragment implements View.OnClickList
     private View rootview;
     private ArrayList<String> list;
     private int index;
-    private ConstraintLayout constraintLayout;
     private TextView infoName_TextView, infoLocation_TextView, infoSize_TextView, infoType_TextView, infoExt_TextView, infoCreated_TextView;
     private Activity activity;
 
@@ -47,16 +48,10 @@ public class Information_Data extends DialogFragment implements View.OnClickList
         this.activity = activity;
     }
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         rootview = inflater.inflate(R.layout.custom_dialog_info_layout, container, false);
-
         Reference();
-
-
-        activity.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        constraintLayout.setBackgroundColor(getResources().getColor(R.color.tabBackgroundColor));
 
         // Fill Dialog Box
         FillIt();
@@ -66,7 +61,6 @@ public class Information_Data extends DialogFragment implements View.OnClickList
 
     private void Reference() {
         // Reference Object
-        constraintLayout = rootview.findViewById(R.id.constraintLayout);
         infoName_TextView = rootview.findViewById(R.id.infoName_TextView);
         infoLocation_TextView = rootview.findViewById(R.id.infoLocation_TextView);
         infoSize_TextView = rootview.findViewById(R.id.infoSize_TextView);
@@ -93,7 +87,7 @@ public class Information_Data extends DialogFragment implements View.OnClickList
 
         infoSize_TextView.setText(FileSize.Convert_It(filePath.length()));
 
-        if (filePath.getAbsolutePath().contains("Whatsapp Status/Photo/"))
+        if (filePath.getAbsolutePath().contains("Unlimited Status/Photo/"))
             infoType_TextView.setText(getResources().getString(R.string.photo_Text));
         else {
             infoType_TextView.setText(getResources().getString(R.string.video_Text));
@@ -125,7 +119,6 @@ public class Information_Data extends DialogFragment implements View.OnClickList
         DisplayMetrics dm = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
-        int height = dm.heightPixels;
         // Travel up the tree until fail, modifying the LayoutParams
         do {
             // Get the parent
@@ -143,7 +136,6 @@ public class Information_Data extends DialogFragment implements View.OnClickList
 
                 // Modify the layout
                 current.getLayoutParams().width = width - ((10 * width) / 100);
-                current.getLayoutParams().height = height - ((30 * height) / 100);
 
             }
         } while (current.getParent() != null);
