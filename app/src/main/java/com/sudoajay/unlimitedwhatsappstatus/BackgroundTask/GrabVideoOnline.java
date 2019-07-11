@@ -132,7 +132,8 @@ public class GrabVideoOnline {
 
     private void AddSites() {
         if (!videoLinkDatabase.isEmpty()) {
-            Cursor cursor = videoLinkDatabase.getLink();
+            long getCount = videoLinkDatabase.getProfilesCount();
+            Cursor cursor = videoLinkDatabase.getLink(getCount);
             if (cursor != null && cursor.moveToFirst()) {
                 try {
                     do {

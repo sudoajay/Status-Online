@@ -150,7 +150,8 @@ public class GrabPhotoOnline {
         try {
             String saveDocument2 = null;
             if (!photoLinkDatabase.isEmpty()) {
-                Cursor cursor = photoLinkDatabase.getLink();
+                long getCount = photoLinkDatabase.getProfilesCount();
+                Cursor cursor = photoLinkDatabase.getLink(getCount);
                 if (cursor != null) {
                     cursor.moveToFirst();
                     do {

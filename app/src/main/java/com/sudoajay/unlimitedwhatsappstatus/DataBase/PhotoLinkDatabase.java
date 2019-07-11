@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -57,9 +58,16 @@ public class PhotoLinkDatabase extends SQLiteOpenHelper {
         return count <= 0;
     }
 
-    public Cursor getLink(){
+    public Cursor getLink(final long getCount){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        return sqLiteDatabase.rawQuery("select ID , Link from DATABASE_TABLE_NAME WHERE Done = ?" ,new String []{ 0+"" });
+        return sqLiteDatabase.rawQuery("select ID , Link from DATABASE_TABLE_NAME WHERE Done = 0 "+"" +
+                " Order By Random() limit "+getCount+"",null);
+    }
+    public long getProfilesCount() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        long count = DatabaseUtils.queryNumEntries(db, DATABASE_TABLE_NAME);
+        db.close();
+        return count;
     }
 
     public void UpdateTheDoneColumn(final String id , final int Done){
