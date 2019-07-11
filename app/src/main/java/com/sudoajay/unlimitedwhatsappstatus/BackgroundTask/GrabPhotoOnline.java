@@ -118,7 +118,7 @@ public class GrabPhotoOnline {
                         pattern = Pattern.compile(expression);
                         Matcher matcher3 = pattern.matcher(matcher2.group(0));
                         while (matcher3.find()) {
-                            photoUrl.add(site.get(2) + matcher2.group(0).substring(6));
+                            photoUrl.add(site.get(2) + matcher3.group(0).substring(6));
                         }
                     }
                 }

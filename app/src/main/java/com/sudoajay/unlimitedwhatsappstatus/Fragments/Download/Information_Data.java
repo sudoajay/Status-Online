@@ -30,6 +30,7 @@ import com.sudoajay.unlimitedwhatsappstatus.R;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Information_Data extends DialogFragment implements View.OnClickListener {
 
@@ -37,6 +38,7 @@ public class Information_Data extends DialogFragment implements View.OnClickList
     private View rootview;
     private ArrayList<String> list;
     private int index;
+    private ConstraintLayout constraintLayout;
     private TextView infoName_TextView, infoLocation_TextView, infoSize_TextView, infoType_TextView, infoExt_TextView, infoCreated_TextView;
     private Activity activity;
 
@@ -52,7 +54,11 @@ public class Information_Data extends DialogFragment implements View.OnClickList
 
         rootview = inflater.inflate(R.layout.custom_dialog_info_layout, container, false);
         Reference();
-
+        // setup dialog box
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Objects.requireNonNull(getDialog().getWindow()).setBackgroundDrawable( new ColorDrawable(Color.TRANSPARENT));
+        }
+        constraintLayout.setBackgroundColor( getResources().getColor(R.color.tabBackgroundColor));
         // Fill Dialog Box
         FillIt();
 
@@ -61,6 +67,7 @@ public class Information_Data extends DialogFragment implements View.OnClickList
 
     private void Reference() {
         // Reference Object
+        constraintLayout = rootview.findViewById(R.id.constraintLayout);
         infoName_TextView = rootview.findViewById(R.id.infoName_TextView);
         infoLocation_TextView = rootview.findViewById(R.id.infoLocation_TextView);
         infoSize_TextView = rootview.findViewById(R.id.infoSize_TextView);
