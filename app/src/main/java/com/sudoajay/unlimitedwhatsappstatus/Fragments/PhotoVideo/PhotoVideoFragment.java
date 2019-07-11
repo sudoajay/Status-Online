@@ -8,12 +8,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
@@ -21,19 +20,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-
 import com.sudoajay.lodinganimation.LoadingAnimation;
-import com.sudoajay.unlimitedwhatsappstatus.BackgroundTask.GrabPhotoOnline;
-import com.sudoajay.unlimitedwhatsappstatus.BackgroundTask.GrabVideoOnline;
 import com.sudoajay.unlimitedwhatsappstatus.DataBase.PhotoDataBase;
 import com.sudoajay.unlimitedwhatsappstatus.DataBase.VideoDataBase;
-import com.sudoajay.unlimitedwhatsappstatus.HelperClass.CustomToast;
 import com.sudoajay.unlimitedwhatsappstatus.R;
 import com.sudoajay.unlimitedwhatsappstatus.sharedPreferences.PrefManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -155,7 +149,6 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
         imgLink.clear();
         if (tabName.equals("photo")) {
             // BackgroundTask
-            new GrabPhotoOnline(getActivity());
             if (!prefManager.isPhotoLinkGrab()) {
                 loadingAnimation.start();
                 RunThread_LoadingAnimationPhoto();
@@ -164,7 +157,6 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
                 GrabPhotoAndRefresh();
             }
         } else {
-            new GrabVideoOnline(getActivity());
 
             if (!prefManager.isVideoLinkGrab()) {
                 loadingAnimation.start();
@@ -231,7 +223,11 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
             }, 1000);
         } else {
             loadingAnimation.stop();
-            GrabPhotoAndRefresh();
+            if (tabName.equals("photo")) {
+                GrabPhotoAndRefresh();
+            } else {
+                GrabVideoAndRefresh();
+            }
             mPhotoVideoAdapter.notifyDataSetChanged();
         }
 

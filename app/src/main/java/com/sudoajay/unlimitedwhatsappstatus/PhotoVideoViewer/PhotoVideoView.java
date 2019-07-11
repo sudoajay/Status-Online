@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
-
 import com.sudoajay.unlimitedwhatsappstatus.HelperClass.Delete;
 import com.sudoajay.unlimitedwhatsappstatus.HelperClass.SaveFile;
 import com.sudoajay.unlimitedwhatsappstatus.MainActivity;

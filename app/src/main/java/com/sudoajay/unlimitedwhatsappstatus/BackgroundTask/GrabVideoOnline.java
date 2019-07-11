@@ -7,7 +7,6 @@ import com.sudoajay.unlimitedwhatsappstatus.DataBase.VideoDataBase;
 import com.sudoajay.unlimitedwhatsappstatus.DataBase.VideoLinkDatabase;
 import com.sudoajay.unlimitedwhatsappstatus.sharedPreferences.PrefManager;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,7 +25,7 @@ public class GrabVideoOnline {
     private Set<String> videoUrl = new HashSet<>();
     private VideoLinkDatabase videoLinkDatabase;
     private VideoDataBase videoDataBase;
-    private List<String> sites=  new ArrayList<>();
+    private List<String> sites = new ArrayList<>();
 
     public GrabVideoOnline(final Context context) {
 
@@ -68,7 +67,7 @@ public class GrabVideoOnline {
         try {
             String document = null;
             try {
-                document = getHtml(sites.get(0)+"/");
+                document = getHtml(sites.get(0) + "/");
             } catch (IOException e) {
             }
 
@@ -93,7 +92,7 @@ public class GrabVideoOnline {
         try {
             String document = null;
             try {
-                document = getHtml(sites.get(1)+"/video/");
+                document = getHtml(sites.get(1) + "/video/");
             } catch (IOException e) {
             }
 
@@ -102,7 +101,7 @@ public class GrabVideoOnline {
             Matcher matcher = pattern.matcher(document);
             while (matcher.find()) {
 
-                String url =sites.get(1) + matcher.group(0).substring(29, matcher.group(0).length() - 2);
+                String url = sites.get(1) + matcher.group(0).substring(29, matcher.group(0).length() - 2);
                 videoUrl.add(url);
                 try {
                     document = getHtml(url);
@@ -155,7 +154,7 @@ public class GrabVideoOnline {
                             Matcher matcher1 = pattern1.matcher(document);
                             while (matcher1.find() && matcher.find()) {
                                 String name = matcher.group(0).replaceAll("/", " ")
-                                        .substring(0, matcher.group(0).length()-3).replace(".","");;
+                                        .substring(0, matcher.group(0).length() - 3).replace(".", "");
                                 String videoLink = sites.get(0) + "/" + matcher.group(0);
                                 String imgLink = matcher1.group(0).substring(40);
                                 videoDataBase.FillIt(videoLink, name.trim(), imgLink);
@@ -194,7 +193,7 @@ public class GrabVideoOnline {
                         }
                         videoLinkDatabase.UpdateTheDoneColumn(cursor.getString(0), 1);
                     } while (cursor.moveToNext());
-                }catch (Exception ignored){
+                } catch (Exception ignored) {
 
                 }
             }

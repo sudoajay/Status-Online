@@ -226,6 +226,9 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
                     prefManager.setFilePath(new HashSet<>(filePathSelected));
                     CustomToast.ToastIt(activity, "Successfully file was removed", Toast.LENGTH_LONG);
                 }
+
+                DeletedSelectedFromList();
+                notifyDataSetChanged();
                 activity.getActionMode().finish();
                 dialog.dismiss();
             }
@@ -240,6 +243,15 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
         dialog.show();
     }
 
+    private void DeletedSelectedFromList() {
+        for (int i = 0; i < fileSelected.size(); i++) {
+            if (fileSelected.get(i)) {
+                list.remove(i);
+            }
+        }
+        fileSelected.clear();
+        filePathSelected.clear();
+    }
     private void DeleteTheSelectedFile() {
         for (String filePath : filePathSelected) {
             new Delete().DeleteTheData(filePath);

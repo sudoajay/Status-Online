@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 
 import com.sudoajay.unlimitedwhatsappstatus.R;
 
-
 import java.util.HashSet;
 import java.util.Set;
 

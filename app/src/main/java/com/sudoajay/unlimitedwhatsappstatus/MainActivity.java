@@ -1,8 +1,11 @@
 package com.sudoajay.unlimitedwhatsappstatus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +15,6 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.SearchView;
@@ -21,6 +23,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.sudoajay.unlimitedwhatsappstatus.BackgroundTask.GrabPhotoOnline;
+import com.sudoajay.unlimitedwhatsappstatus.BackgroundTask.GrabVideoOnline;
 import com.sudoajay.unlimitedwhatsappstatus.Fragments.Download.Information_Data;
 import com.sudoajay.unlimitedwhatsappstatus.Permission.AndroidExternalStoragePermission;
 
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private SearchView searchView;
     private MyAdapter adapter;
     private ActionMode actionMode;
+    private boolean fetchData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        RunThread();
     }
 
     private void Reference() {
@@ -184,6 +190,30 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    private void RunThread() {
+
+        if (isOnline()) {
+            new GrabPhotoOnline(this);
+            new GrabVideoOnline(this);
+            fetchData = true;
+        }
+        if (!fetchData) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    RunThread();
+                }
+            }, 5000); // 5 sec
+        }
+    }
+
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
     public void CallInfo_CustomDialog(final String tabName, final ArrayList<String> list, final int index) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         Information_Data information_data = new Information_Data(tabName, MainActivity.this,list,index);
