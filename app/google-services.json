@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1082978091083:android:e38a52adca378028",
+        "mobilesdk_app_id": "1:1082978091083:android:8f0909e55a34d751",
         "android_client_info": {
-          "package_name": "com.sudoajay.unlimitedwhatsappstatus"
+          "package_name": "com.sudoajay.statusonline"
         }
       },
       "oauth_client": [

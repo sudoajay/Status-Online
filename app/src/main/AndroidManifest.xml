@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sudoajay.unlimitedwhatsappstatus">
+    package="com.sudoajay.statusonline">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,7 +18,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning,UnusedAttribute">
         <activity
-            android:name=".MainActivity"
+            android:name="com.sudoajay.statusonline.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,11 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".PhotoVideoViewer.PhotoVideoView"
+
+        <activity android:name="com.sudoajay.statusonline.PhotoVideoViewer.PhotoVideoView"
             android:screenOrientation="portrait"
             android:theme="@style/PhotoVideoViewTheme"
             tools:ignore="InnerclassSeparator" />
@@ -45,7 +43,7 @@
                 android:resource="@xml/provider_paths" />
         </provider>
         <service
-            android:name="com.sudoajay.unlimitedwhatsappstatus.Firebase_Message_Config.MyFireBaseInstanceMessageService"
+            android:name="com.sudoajay.statusonline.Firebase_Message_Config.MyFireBaseInstanceMessageService"
             android:exported="false"
             android:stopWithTask="false"
             tools:ignore="InnerclassSeparator">
@@ -54,6 +52,9 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

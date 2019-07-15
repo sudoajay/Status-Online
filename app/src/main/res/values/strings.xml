@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Unlimited Status</string>
+    <string name="app_name">Status Online</string>
     <!--Tab Name-->
     <string name="photoTab">Photo</string>
     <string name="videoTab">Video</string>
