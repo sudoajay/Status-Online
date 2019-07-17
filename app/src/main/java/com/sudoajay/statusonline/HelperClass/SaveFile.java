@@ -9,26 +9,21 @@ import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.sudoajay.statusonline.Permission.AndroidExternalStoragePermission;
 import com.sudoajay.statusonline.R;
-import com.sudoajay.statusonline.sharedPreferences.PrefManager;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class SaveFile {
 
     private String filePath, aapFolder, tabName,fileName,whichFragment;
     private Activity activity;
+    private BroadcastReceiver sendBroadcastReceiver;
     private final String errorMes = "Sorry Can't Process this Please report this";
-    private final String existMes = "File Already Saved";
 
-    public SaveFile(final Activity activity, final String filePath,final String fileName, final String tabName, final String whichFragment) {
+    public SaveFile(final Activity activity,final String filePath,final String fileName, final String tabName, final String whichFragment) {
         this.filePath = filePath;
         this.activity = activity;
         this.fileName =fileName;
@@ -41,12 +36,11 @@ public class SaveFile {
 
         CheckForFolder(); // check folder and create folder if not present
 
-
-        if (!whichFragment.equalsIgnoreCase("online")) {
-            SaveItLocal();           // save the file
-        } else {
             SaveItOnline();           // save the file
-        }
+
+        AndroidExternalStoragePermission androidExternalStoragePermission = new AndroidExternalStoragePermission(activity,activity);
+        if(!androidExternalStoragePermission.isExternalStorageWritable())
+            androidExternalStoragePermission.call_Thread();
     }
 
     private void CheckForFolder() {
@@ -69,38 +63,7 @@ public class SaveFile {
         }
     }
 
-    public void SaveItLocal() {
-        InputStream is;
-        OutputStream os;
-        String getName = new File(filePath).getName();
-        try {
-            File outputFile = new File(aapFolder + "/" + tabName + "/" + getName);
-            if (new File(aapFolder + "/" + tabName).exists()) {
-                if (outputFile.createNewFile()) {
-                    is = new FileInputStream(new File(filePath));
-                    os = new FileOutputStream(outputFile);
 
-                    byte[] buffer = new byte[1024];
-                    int read;
-                    while ((read = is.read(buffer)) != -1) {
-                        os.write(buffer, 0, read);
-                    }
-                    ToastIt("File Saved");
-                    // Removed the path
-
-                } else {
-                    ToastIt(existMes);
-                }
-            }else {
-                ToastIt(errorMes);
-            }
-            new PrefManager(activity.getApplicationContext()).RemovePath(outputFile.getAbsolutePath());
-        } catch (Exception e) {
-            if (e.getMessage().equals("write failed: ENOSPC (No space left on device)"))
-                ToastIt( "No space left on device");
-
-        }
-    }
 
     private void SaveItOnline() {
         File direct = new File(aapFolder + "/" + tabName + "/");
@@ -110,7 +73,6 @@ public class SaveFile {
 
                 getName = fileName.replace(".", "");
 
-                Log.e("SaveItOnline",filePath );
 
                 // Get extension
                 int i = filePath.lastIndexOf('.');
@@ -118,6 +80,9 @@ public class SaveFile {
                     extension = filePath.substring(i);
                 }
 
+                File outPutFile = new File("/" +
+                        activity.getResources().getString(R.string.app_name) + "/" +
+                        tabName + "/" +getName+extension);
                 final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(Context.DOWNLOAD_SERVICE);
 
                 Uri downloadUri = Uri.parse(filePath);
@@ -129,12 +94,14 @@ public class SaveFile {
                                 | DownloadManager.Request.NETWORK_MOBILE)
                         .setAllowedOverRoaming(false).setTitle(getName)
                         .setDescription("Downloading WhatsApp Status")
-                        .setDestinationInExternalPublicDir("/" + activity.getResources().getString(R.string.app_name) + "/" + tabName + "/", getName + extension);
+                        .setDestinationInExternalPublicDir("/" +
+                                activity.getResources().getString(R.string.app_name) + "/" +
+                                tabName + "/",getName+extension);
 
                 downloadManager.enqueue(request);
 
 
-                BroadcastReceiver receiver = new BroadcastReceiver() {
+                 sendBroadcastReceiver = new BroadcastReceiver() {
                     @Override
                     public void onReceive(Context context, Intent intent) {
                         String action = intent.getAction();
@@ -148,6 +115,7 @@ public class SaveFile {
                                 int columnIndex = c
                                         .getColumnIndex(DownloadManager.COLUMN_STATUS);
                                 if (DownloadManager.STATUS_SUCCESSFUL == c.getInt(columnIndex)) {
+
                                     CustomToast.ToastIt(context, "File Saved", Toast.LENGTH_LONG);
                                 } else if (DownloadManager.STATUS_FAILED == c.getInt(columnIndex)) {
                                     CustomToast.ToastIt(context, "File Not Saved", Toast.LENGTH_LONG);
@@ -157,9 +125,11 @@ public class SaveFile {
                     }
                 };
 
-                activity.registerReceiver(receiver, new IntentFilter(
+                activity.registerReceiver(sendBroadcastReceiver, new IntentFilter(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+            new MediaScanner(activity,outPutFile);
             }
+
         }catch (Exception e){
             if (e.getMessage().equals("write failed: ENOSPC (No space left on device)"))
                 ToastIt( "No space left on device");
@@ -168,6 +138,18 @@ public class SaveFile {
 
     private void ToastIt(final String mess){
         Toast.makeText(activity,mess,Toast.LENGTH_SHORT).show();
+    }
+
+
+
+    public void stopIt() {
+        try {
+            if (sendBroadcastReceiver != null)
+                activity.unregisterReceiver(sendBroadcastReceiver);
+        } catch (Exception e) {
+
+        }
+
     }
 
 }

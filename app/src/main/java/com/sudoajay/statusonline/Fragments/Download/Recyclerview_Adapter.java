@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.sudoajay.statusonline.HelperClass.CustomToast;
 import com.sudoajay.statusonline.HelperClass.Delete;
+import com.sudoajay.statusonline.HelperClass.MediaScanner;
 import com.sudoajay.statusonline.MainActivity;
 import com.sudoajay.statusonline.PhotoVideoViewer.PhotoVideoView;
 import com.sudoajay.statusonline.R;
@@ -244,7 +245,7 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
     }
 
     private void DeletedSelectedFromList() {
-        for (int i = 0; i < fileSelected.size(); i++) {
+        for (int i = list.size()-1; i >=0; i--) {
             if (fileSelected.get(i)) {
                 list.remove(i);
             }
@@ -255,6 +256,7 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
     private void DeleteTheSelectedFile() {
         for (String filePath : filePathSelected) {
             new Delete().DeleteTheData(filePath);
+            new MediaScanner(activity,new File(filePath));
         }
     }
 

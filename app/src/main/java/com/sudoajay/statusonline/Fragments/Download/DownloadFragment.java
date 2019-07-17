@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -60,12 +61,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         GrabAndFill();
 
 
-        recyclerview_adapter = new Recyclerview_Adapter(main_Activity, grabData.getArrayPath(), DownloadFragment.this);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        recyclerView.setAdapter(recyclerview_adapter);
         // if there is no data
         if (grabData.getArrayPath().isEmpty()) {
             nothingToShow_ConstraintsLayout.setVisibility(View.VISIBLE);
@@ -105,7 +101,6 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
             @Override
             public void run() {
                 GrabAndFill();
-                recyclerview_adapter.notifyDataSetChanged();
                 swipeToRefresh.setRefreshing(false);
             }
         }, 2000);
@@ -125,10 +120,14 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         for (String arry : grabData.getArrayPath()) {
             lastModiArry.add(new File(arry).lastModified());
         }
+
+        recyclerview_adapter = new Recyclerview_Adapter(main_Activity, grabData.getArrayPath(), DownloadFragment.this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.setAdapter(recyclerview_adapter);
         LastModiSort();
-
-
-
     }
 
     public Recyclerview_Adapter getRecyclerview_adapter() {

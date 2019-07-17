@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.sudoajay.statusonline.Permission.AndroidExternalStoragePermission;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -32,6 +34,9 @@ public class GrabData {
                 }
             }
         } catch (Exception e) {
+            AndroidExternalStoragePermission androidExternalStoragePermission = new AndroidExternalStoragePermission(activity,activity);
+            if(!androidExternalStoragePermission.isExternalStorageWritable())
+                androidExternalStoragePermission.call_Thread();
             CustomToast.ToastIt(activity, errorMes, Toast.LENGTH_LONG);
         }
     }

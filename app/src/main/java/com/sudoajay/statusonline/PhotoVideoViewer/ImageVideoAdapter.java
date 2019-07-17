@@ -309,9 +309,6 @@ public class ImageVideoAdapter extends PagerAdapter {
                 case R.id.video_Play_ImageView:
 
                     open_With(new File(filPath));
-//                    videoView.stopPlayback();
-//                    videoView.setVideoPath(filPath);
-//                    videoView.start();
                     break;
             }
         }

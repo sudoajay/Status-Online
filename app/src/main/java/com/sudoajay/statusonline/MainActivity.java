@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private MyAdapter adapter;
     private ActionMode actionMode;
     private boolean fetchData;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,10 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         Reference();
 
-//        Intent intent = getIntent();
-//        if(intent.getStringExtra("WhichFragment") != null){
-//            whichFragment = intent.getStringExtra("WhichFragment");
-//        }
+        Intent intent = getIntent();
+        if(intent.getStringExtra("WhichFragment") != null){
+            whichFragment = intent.getStringExtra("WhichFragment");
+        }
         // set up External storage Permission
         AndroidExternalStoragePermission androidExternalStoragePermission = new AndroidExternalStoragePermission(
                 MainActivity.this, MainActivity.this);
@@ -117,6 +116,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if(whichFragment != null && whichFragment.equals("Download")){
+            TabLayout.Tab tab = tabLayout.getTabAt(2);
+            assert tab != null;
+            tab.select();
+        }
         RunThread();
     }
 

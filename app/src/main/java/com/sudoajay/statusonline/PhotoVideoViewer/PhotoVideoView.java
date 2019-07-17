@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.sudoajay.statusonline.HelperClass.Delete;
+import com.sudoajay.statusonline.HelperClass.MediaScanner;
 import com.sudoajay.statusonline.HelperClass.SaveFile;
 import com.sudoajay.statusonline.MainActivity;
 import com.sudoajay.statusonline.R;
@@ -30,6 +31,7 @@ public class PhotoVideoView extends AppCompatActivity {
     private String tabName, whichFragment,pathArrayPosition,filePath, fileName,fileImgLink;
     private TextView save_TextView, file_Name_TextView, share_TextView;
     private ViewPager viewPager;
+    private SaveFile saveFile;
     private List<String> pathArray, pathName,imgLink;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -147,10 +149,11 @@ public class PhotoVideoView extends AppCompatActivity {
             case R.id.save_delete_ImageView:
             case R.id.save_delete_TextView:
                 if (whichFragment.equalsIgnoreCase("local") || whichFragment.equalsIgnoreCase("online")) {
-                    new SaveFile(PhotoVideoView.this, filePath , fileName , tabName, whichFragment);
+                    saveFile = new SaveFile(PhotoVideoView.this, filePath, fileName, tabName, whichFragment);
                 }
                 else {
                     new Delete().DeleteTheData(filePath);
+                    new MediaScanner(PhotoVideoView.this, new File(filePath));
                     ToastIt("File Deleted");
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("WhichFragment","Download");
@@ -168,7 +171,13 @@ public class PhotoVideoView extends AppCompatActivity {
     @SuppressLint("ResourceType")
     public void HideStatusNavigation() {
         View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        int uiOptions = 0;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+        } else {
+            uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN;
+
+        }
         decorView.setSystemUiVisibility(uiOptions);
 
 
@@ -231,4 +240,17 @@ public class PhotoVideoView extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStop() {
+        if (saveFile != null)
+            saveFile.stopIt();
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (saveFile != null)
+            saveFile.stopIt();
+        super.onDestroy();
+    }
 }
