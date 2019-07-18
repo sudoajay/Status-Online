@@ -1,6 +1,7 @@
 package com.sudoajay.statusonline.PhotoVideoViewer;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,6 +12,7 @@ import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,11 +30,13 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.sudoajay.statusonline.BuildConfig;
+import com.sudoajay.statusonline.HelperClass.CustomToast;
 import com.sudoajay.statusonline.R;
 
 import java.io.File;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.Objects;
 
 public class ImageVideoAdapter extends PagerAdapter {
     private List<String> pathArray;
@@ -243,19 +247,24 @@ public class ImageVideoAdapter extends PagerAdapter {
 
 
     public void open_With(File file) {
-        try {
-            MimeTypeMap myMime = MimeTypeMap.getSingleton();
-            Intent newIntent = new Intent(Intent.ACTION_VIEW);
-            String mimeType = myMime.getMimeTypeFromExtension(fileExt(file.getAbsolutePath())).substring(1);
-            Uri URI = FileProvider.getUriForFile(activity,
-                    BuildConfig.APPLICATION_ID + ".provider",
-                    file);
-            newIntent.setDataAndType(URI, mimeType);
-            newIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
+        MimeTypeMap myMime = MimeTypeMap.getSingleton();
+        Intent newIntent = new Intent(Intent.ACTION_VIEW);
+        String mimeType = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            mimeType = myMime.getMimeTypeFromExtension(Objects.requireNonNull(fileExt(file.getAbsolutePath())).substring(1));
+        }else {
+            mimeType = myMime.getMimeTypeFromExtension(fileExt(file.getAbsolutePath())).substring(1);
+        }
+        Uri URI = FileProvider.getUriForFile(activity,
+                BuildConfig.APPLICATION_ID + ".provider",
+                file);
+        newIntent.setDataAndType(URI, mimeType);
+        newIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
             activity.startActivity(newIntent);
         } catch (Exception e) {
-            ToastIt("No handler for this type of file.");
+            CustomToast.ToastIt(activity, "No handler for this type of file_icon.",Toast.LENGTH_LONG);
         }
     }
 
@@ -307,7 +316,6 @@ public class ImageVideoAdapter extends PagerAdapter {
                     SetSystemUi();
                     break;
                 case R.id.video_Play_ImageView:
-
                     open_With(new File(filPath));
                     break;
             }

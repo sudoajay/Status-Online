@@ -177,6 +177,8 @@ public class PhotoVideoFragment extends Fragment implements SwipeRefreshLayout.O
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                mPhotoVideoAdapter.getFilter().filter("");
+                searchText = "";
                 GrabAndFill();
                 swipeToRefresh.setRefreshing(false);
             }

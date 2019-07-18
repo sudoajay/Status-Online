@@ -339,8 +339,11 @@ public class Recyclerview_Adapter extends RecyclerView.Adapter<Recyclerview_Adap
                         searchList.add(get);
                     }
                 }
-            }
+            }else {
+                    searchList.clear();
+                    searchList.addAll(completeList);
 
+            }
             FilterResults results = new FilterResults();
             results.values = searchList;
 

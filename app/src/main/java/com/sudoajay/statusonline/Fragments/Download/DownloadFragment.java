@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -100,6 +99,8 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                recyclerview_adapter.getFilter().filter("");
+
                 GrabAndFill();
                 swipeToRefresh.setRefreshing(false);
             }
