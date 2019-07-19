@@ -33,6 +33,7 @@ public class PhotoVideoView extends AppCompatActivity {
     private ViewPager viewPager;
     private SaveFile saveFile;
     private List<String> pathArray, pathName,imgLink;
+    private final String shareIt = "Hey check this app - "+" https://play.google.com/store/apps/details?id=com.sudoajay.statusonline";
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -205,7 +206,7 @@ public class PhotoVideoView extends AppCompatActivity {
                 shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareIt);
                 shareIntent.setType("image/*");
                 startActivity(Intent.createChooser(shareIntent, "Share with"));
             } else {
@@ -214,7 +215,7 @@ public class PhotoVideoView extends AppCompatActivity {
                 shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, shareIt);
                 shareIntent.setType("video/*");
                 startActivity(Intent.createChooser(shareIntent, "Share with"));
             }

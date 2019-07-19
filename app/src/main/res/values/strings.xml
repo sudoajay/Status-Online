@@ -60,4 +60,20 @@
     <!--Search not found-->
     <string name="search_not_found">Oops, Item Not Found!!</string>
     <string name="search_not_found_text">Try rewording your search or entering a new keyword</string>
+
+    <!--first time check flash screen-->
+    <string name="isFirstTimeLaunch">Is First Time Launch</string>
+    <string name="next">Next</string>
+    <string name="start">Start</string>
+    <string name="skip">Skip</string>
+
+
+    <!--Slide Information-->
+    <string name="slide_1_title">Photo Status</string>
+    <string name="slide_1_desc">Over 35000 Photo Status Available</string>
+    <string name="slide_2_title">Video Status</string>
+    <string name="slide_2_desc">Over 15000 Video Status Available</string>
+    <string name="slide_3_title">Download Folder</string>
+    <string name="slide_3_desc">You Can Manage Your Download Status</string>
+
 </resources>

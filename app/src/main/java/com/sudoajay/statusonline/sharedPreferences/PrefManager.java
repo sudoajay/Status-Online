@@ -69,4 +69,13 @@ public class PrefManager {
         editor.putBoolean(context.getString(R.string.video_link_grab), isLinkGrab);
         editor.apply();
     }
+
+    public void setFirstTimeLaunch(boolean isFirstTime) {
+        editor.putBoolean(context.getString(R.string.isFirstTimeLaunch), isFirstTime);
+        editor.apply();
+    }
+
+    public boolean isFirstTimeLaunch() {
+        return pref.getBoolean(context.getString(R.string.isFirstTimeLaunch), true);
+    }
 }
