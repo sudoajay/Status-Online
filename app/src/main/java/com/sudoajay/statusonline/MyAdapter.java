@@ -26,9 +26,11 @@ public class MyAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return photo = new PhotoVideoFragment(tabName[0], mainActivity);
+//            case 1:
+//                return video = new PhotoVideoFragment(tabName[1], mainActivity);
+//            case 2:
+//                return downloadFragment = new DownloadFragment(mainActivity);
             case 1:
-                return video = new PhotoVideoFragment(tabName[1], mainActivity);
-            case 2:
                 return downloadFragment = new DownloadFragment(mainActivity);
             default:
                 return null;

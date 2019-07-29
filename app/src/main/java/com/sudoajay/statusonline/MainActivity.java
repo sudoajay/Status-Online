@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Reference();
 
         Intent intent = getIntent();
         if(intent.getStringExtra("WhichFragment") != null){
@@ -101,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 Drawable icon = tab.getIcon();
                 assert icon != null;
                 DrawableCompat.setTintList(icon, tabSlected);
+
+
             }
 
             @Override
@@ -117,7 +118,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if(whichFragment != null && whichFragment.equals("Download")){
-            TabLayout.Tab tab = tabLayout.getTabAt(2);
+//            TabLayout.Tab tab = tabLayout.getTabAt(2);
+
+            TabLayout.Tab tab = tabLayout.getTabAt(1);
             assert tab != null;
             tab.select();
         }
@@ -198,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (isOnline()) {
             new GrabPhotoOnline(this);
-            new GrabVideoOnline(this);
+//            new GrabVideoOnline(this);
             fetchData = true;
         }
         if (!fetchData) {

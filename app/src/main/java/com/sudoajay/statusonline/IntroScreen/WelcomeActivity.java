@@ -1,4 +1,4 @@
-package com.sudoajay.statusonline.SplashScreen;
+package com.sudoajay.statusonline.IntroScreen;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +23,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.sudoajay.statusonline.MainActivity;
 import com.sudoajay.statusonline.R;
+import com.sudoajay.statusonline.SplashScreen.Splash;
 import com.sudoajay.statusonline.sharedPreferences.PrefManager;
 
 public class WelcomeActivity extends AppCompatActivity {
@@ -122,17 +123,21 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(false);
+
         if (getIntent().getExtras() != null && getIntent().getExtras().getString("Url") != null) {
             String url = getIntent().getExtras().getString("Url");
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(url));
             startActivity(intent);
         } else {
-
-            startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+            if(prefManager.isFirstTimeLaunch()) {
+                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+            }else{
+                startActivity(new Intent(WelcomeActivity.this, Splash.class));
+            }
             finish();
         }
+        prefManager.setFirstTimeLaunch(false);
     }
 
     //	viewpager change listener

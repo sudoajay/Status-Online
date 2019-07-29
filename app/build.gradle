@@ -6,8 +6,8 @@ android {
         applicationId "com.sudoajay.statusonline"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "2.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         renderscriptTargetApi 21
         renderscriptSupportModeEnabled true
@@ -15,8 +15,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

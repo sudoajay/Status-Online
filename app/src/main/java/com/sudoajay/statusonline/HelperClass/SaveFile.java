@@ -127,7 +127,7 @@ public class SaveFile {
 
                 activity.registerReceiver(sendBroadcastReceiver, new IntentFilter(
                         DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-            new MediaScanner(activity,outPutFile);
+               new MediaScanner(activity,outPutFile);
             }
 
         }catch (Exception e){

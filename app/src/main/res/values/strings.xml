@@ -47,7 +47,7 @@
     <string name="save_text">Save</string>
 
     <!--Toast Name-->
-    <string name="cant_OnlineShare">Sorry, you can\'t share this</string>
+    <string name="cant_OnlineShare">Sorry but first you have to save it</string>
     <string name="sorry_WeDontSupport">Sorry We Don\'t Support That Format</string>
     <string name="sorry_CantPlayed">Sorry, this video cannot be played</string>
     <string name="loading">Buffering…</string>

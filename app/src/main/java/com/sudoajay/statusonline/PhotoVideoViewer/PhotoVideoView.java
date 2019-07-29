@@ -154,7 +154,7 @@ public class PhotoVideoView extends AppCompatActivity {
                 }
                 else {
                     new Delete().DeleteTheData(filePath);
-                    new MediaScanner(PhotoVideoView.this, new File(filePath));
+                    new MediaScanner(PhotoVideoView.this,new File(filePath));
                     ToastIt("File Deleted");
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("WhichFragment","Download");

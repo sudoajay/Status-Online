@@ -1,11 +1,14 @@
 package com.sudoajay.statusonline.Fragments.Download;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -57,22 +60,22 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         swipeToRefresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         fileRemove = new PrefManager(main_Activity.getApplicationContext()).getFilePath();
-        GrabAndFill();
 
-
-
-        // if there is no data
-        if (grabData.getArrayPath().isEmpty()) {
-            nothingToShow_ConstraintsLayout.setVisibility(View.VISIBLE);
-        } else {
-            nothingToShow_ConstraintsLayout.setVisibility(View.GONE);
-        }
 
         swipeToRefresh.setOnRefreshListener(this);
 
+        OnRefresh();
         // Inflate the layout for this fragment
         return view;
     }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(getContext(), "getreso", Toast.LENGTH_SHORT).show();
+    }
+
 
     public void LastModiSort() {
         long temp;
@@ -93,6 +96,15 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            if (grabData != null)
+                OnRefresh();
+
+        }
+    }
+    @Override
     public void onRefresh() {
 
         swipeToRefresh.setRefreshing(true);
@@ -101,7 +113,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
             public void run() {
                 recyclerview_adapter.getFilter().filter("");
 
-                GrabAndFill();
+                OnRefresh();
                 swipeToRefresh.setRefreshing(false);
             }
         }, 2000);
@@ -113,7 +125,7 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
         if (getActivity() == null) return;
 
         grabData = new GrabData(getActivity(), getResources().getString(R.string.app_name));
-
+        Log.e("GrabAndFill", "You Here");
         for (String file : fileRemove) {
             grabData.getArrayPath().remove(file);
         }
@@ -133,5 +145,14 @@ public class DownloadFragment extends Fragment implements SwipeRefreshLayout.OnR
 
     public Recyclerview_Adapter getRecyclerview_adapter() {
         return recyclerview_adapter;
+    }
+
+    private void OnRefresh() {
+        GrabAndFill();
+        if (grabData.getArrayPath().isEmpty()) {
+            nothingToShow_ConstraintsLayout.setVisibility(View.VISIBLE);
+        } else {
+            nothingToShow_ConstraintsLayout.setVisibility(View.GONE);
+        }
     }
 }
