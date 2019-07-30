@@ -29,11 +29,11 @@
             android:icon="@drawable/photo_icon"
             android:text="@string/photoTab" />
 
-        <!--<com.google.android.material.tabs.TabItem-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:icon="@drawable/video_icon"-->
-            <!--android:text="@string/videoTab" />-->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:icon="@drawable/video_icon"
+            android:text="@string/videoTab" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"

@@ -118,9 +118,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         if(whichFragment != null && whichFragment.equals("Download")){
-//            TabLayout.Tab tab = tabLayout.getTabAt(2);
+            TabLayout.Tab tab = tabLayout.getTabAt(2);
 
-            TabLayout.Tab tab = tabLayout.getTabAt(1);
+//            TabLayout.Tab tab = tabLayout.getTabAt(1);
             assert tab != null;
             tab.select();
         }
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (isOnline()) {
             new GrabPhotoOnline(this);
-//            new GrabVideoOnline(this);
+            new GrabVideoOnline(this);
             fetchData = true;
         }
         if (!fetchData) {
